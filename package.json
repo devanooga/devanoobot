@@ -28,6 +28,8 @@
   },
   "devDependencies": {
     "mocha": "^3.4.2",
-    "should": "^11.2.1"
+    "should": "^11.2.1",
+    "should-sinon": "0.0.5",
+    "sinon": "^2.3.4"
   }
 }
