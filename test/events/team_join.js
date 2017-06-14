@@ -14,9 +14,9 @@ describe('team_join', () => {
 
     team_join(user, null, null, event, null, callback);
     callback.should.be.calledOnce();
-    callback.getArgs().args.should.deepEqual([
+    callback.args[0].should.deepEqual([
       null, {
-        test: `Hello, ${user.name}!`
+        text: `Hello, ${user.name}!`
       }
     ]);
 
