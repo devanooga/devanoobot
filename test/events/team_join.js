@@ -1,6 +1,7 @@
 var should = require('should');
 var sinon = require('sinon');
 require('should-sinon');
+
 var team_join = require('../../functions/events/team_join');
 
 describe('team_join', () => {
@@ -11,7 +12,7 @@ describe('team_join', () => {
     }
     var event = {}
 
-    team_join(user, null, null, event, botToken = null, callback);
+    team_join(user, null, null, event, null, callback);
     callback.should.be.calledOnce();
     callback.getArgs().args.should.deepEqual([
       null, {
