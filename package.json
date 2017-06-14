@@ -4,6 +4,9 @@
   "description": "",
   "author": "agarzola <alfonsog@devanooga.com>",
   "main": "functions/__main__.js",
+  "scripts": {
+    "test": "mocha test/*"
+  },
   "dependencies": {
     "lib": "^3.0.1",
     "mime": "^1.3.4",
