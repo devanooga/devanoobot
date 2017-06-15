@@ -14,16 +14,17 @@ const lib = require('lib')({token: process.env.STDLIB_TOKEN});
  */
 module.exports = (user, channel, text = '', event = {}, botToken = null, callback) => {
 
-    callback(null, {
-        text: `Hello, ${user}!\n`
-            + `Thanks for joining devanooga!\n`
-            + `We started this group to give Chattanooga-area tinkerers a place to learn, develop their careers, and socialize with like minded people.\n`
-            + `We have several channels that you can join that cover a range of topics. Here\'s a few that you might be interested in at first:\n\n`
-            + `- #truebegginers -- We are all a beginner at something. Come learn\n`
-            + `- #opportunities -- Local (and remote) jobs and contracts\n`
-            + `- #hacknight -- Learn about our fortnightly hacknights. Join us!\n\n`
-            + `If you have any questions, please ask for help in #general. We are (mostly) a friendly group, and would love to help you get started.\n\n`
-            + `Thanks again!`
-    });
+  callback(null, {
+    text: `Hello, ${user}!\n`
+      + `Thanks for joining devanooga!\n`
+      + `We started this group to give Chattanooga-area tinkerers a place to learn, develop their careers, and socialize with like minded people.\n`
+      + `We have several channels that you can join that cover a range of topics. Here\'s a few that you might be interested in at first:\n\n`
+      + `- #truebegginers -- We are all a beginner at something. Come learn\n`
+      + `- #opportunities -- Local (and remote) jobs and contracts\n`
+      + `- #hacknight -- Learn about our fortnightly hacknights. Join us!\n\n`
+      + `If you have any questions, please ask for help in #general. We are (mostly) a friendly group, and would love to help you get started.\n\n`
+      + `Thanks again!`,
+    channel: user
+  });
 
 };
