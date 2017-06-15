@@ -22,7 +22,7 @@ module.exports = (user, channel, text = '', event = {}, botToken = null, callbac
     callback(null, {
       text: `Hey there! <@${user}> said ${text}`
     });
-  } else if(text.match(/something stupid/i)) {
+  } else if (channel === 'hacknight' && text.match(/something stupid/i)) {
     callback(null, {
       text: `:facepalm:`
     }); 
