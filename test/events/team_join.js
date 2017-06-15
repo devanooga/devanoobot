@@ -14,11 +14,8 @@ describe('team_join', () => {
 
     team_join(user, null, null, event, null, callback);
     callback.should.be.calledOnce();
-    callback.args[0].should.deepEqual([
-      null, {
-        text: `Hello, ${user.name}!`
-      }
-    ]);
+    callback.args[0][1].should.be.instanceOf(Object);
+    callback.args[0][1].text.should.be.instanceOf(String);
 
     done();
   });
