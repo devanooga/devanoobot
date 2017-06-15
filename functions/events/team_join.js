@@ -15,7 +15,7 @@ const lib = require('lib')({token: process.env.STDLIB_TOKEN});
 module.exports = (user, channel, text = '', event = {}, botToken = null, callback) => {
 
     callback(null, {
-        text: `Hello, ${user.name}!\n`
+        text: `Hello, ${user}!\n`
             + `Thanks for joining devanooga!\n`
             + `We started this group to give Chattanooga-area tinkerers a place to learn, develop their careers, and socialize with like minded people.\n`
             + `We have several channels that you can join that cover a range of topics. Here\'s a few that you might be interested in at first:\n\n`

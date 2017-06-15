@@ -7,10 +7,8 @@ var team_join = require('../../functions/events/team_join');
 describe('team_join', () => {
   it('should respond with a message for the member', (done) => {
     var callback = sinon.spy();
-    var user = {
-      name: 'username'
-    }
-    var event = {}
+    var user = 'username';
+    var event = {};
 
     team_join(user, null, null, event, null, callback);
     callback.should.be.calledOnce();
