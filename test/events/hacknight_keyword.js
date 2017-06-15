@@ -11,9 +11,9 @@ describe('team_join', () => {
     }
     var event = {}
 
-    team_join('username', 'hacknight', 'something stupid', event, null, callback);
+    message('username', 'hacknight', 'something stupid', event, null, callback);
     callback.should.be.calledOnce();
-    callback.getArgs().args.should.deepEqual([
+    callback.args[0].should.deepEqual([
       null, {
         text: `:facepalm:`
       }
