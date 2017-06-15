@@ -26,5 +26,4 @@ module.exports = (user, channel, text = '', event = {}, botToken = null, callbac
       + `Thanks again!`,
     channel: user
   });
-
 };
