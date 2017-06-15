@@ -12,6 +12,7 @@ describe('team_join', () => {
 
     team_join(user, null, null, event, null, callback);
     callback.should.be.calledOnce();
+    callback.args[0][1].channel.should.be.equal(user);
     callback.args[0][1].should.be.instanceOf(Object);
     callback.args[0][1].text.should.be.instanceOf(String);
 
