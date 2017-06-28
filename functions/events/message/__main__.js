@@ -22,7 +22,8 @@ module.exports = (user, channel, text = '', event = {}, botToken = null, callbac
     callback(null, {
       text: `Hey there! <@${user}> said ${text}`
     });
-  } else if (channel === 'hacknight' && text.match(/something stupid/i)) {
+  // C4E4UNSKC is the id for #hacknight
+  } else if (channel === 'C4E4UNSKC' && text.match(/something stupid/i)) {
     callback(null, {
       text: `:facepalm:`
     }); 
