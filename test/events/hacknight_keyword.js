@@ -11,7 +11,7 @@ describe('team_join', () => {
     }
     var event = {}
 
-    message('username', 'hacknight', 'something stupid', event, null, callback);
+    message('username', 'C4E4UNSKC', 'something stupid', event, null, callback);
     callback.should.be.calledOnce();
     callback.args[0].should.deepEqual([
       null, {
