@@ -1,5 +1,3 @@
-const lib = require('lib')({token: process.env.STDLIB_TOKEN});
-
 /**
 * message event
 *
@@ -8,17 +6,12 @@ const lib = require('lib')({token: process.env.STDLIB_TOKEN});
 *
 *   See https://api.slack.com/events-api for more details.
 *
-* @param {string} user The user id of the user that invoked this event (name is usable as well)
-* @param {string} channel The channel id the event was executed in (name is usable as well)
-* @param {string} text The text contents of the event
-* @param {object} event The full Slack event object
-* @param {string} botToken The bot token for the Slack bot you have activated
-* @returns {object}
+* @param {object} event The event object provided by Slack API.
+* @returns {object} The response object sent to Slack API in a response.
 */
 module.exports = (user, channel, text = '', event = {}, botToken = null, callback) => {
-
   // Only send a response to certain messages
-  if (text.match(/\b(hey|hello|hi|sup)\b/i)) {
+  if (text.match(/\b(?:hey|hello|hi|sup)\b/i)) {
     callback(null, {
       text: `Hey there! <@${user}> said ${text}`
     });
@@ -30,5 +23,4 @@ module.exports = (user, channel, text = '', event = {}, botToken = null, callbac
   } else {
     callback(null, {});
   }
-
 };
