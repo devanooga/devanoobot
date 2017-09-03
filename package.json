@@ -8,6 +8,7 @@
     "test": "mocha test/*"
   },
   "dependencies": {
+    "koa": "^2.3.0",
     "slack": "^8.2.1"
   },
   "private": true,
