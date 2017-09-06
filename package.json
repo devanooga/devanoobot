@@ -5,11 +5,14 @@
   "author": "agarzola <alfonsog@devanooga.com>",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "mocha test/*"
   },
   "dependencies": {
     "koa": "^2.3.0",
-    "slack": "^8.2.1"
+    "koa-router": "^7.2.1",
+    "slack": "^8.2.1",
+    "winston": "^2.3.1"
   },
   "private": true,
   "devDependencies": {
