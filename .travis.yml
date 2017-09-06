@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - '8'
+
+install:
+  - npm install
+
+script:
+  - npm test
+
+before_deploy:
+  - eval "$(ssh-agent -s)"ge
+  - echo $PRIVATE_KEY > /tmp/deploy_rsa64
+  - base64 -d < /tmp/deploy_rsa64 > /tmp/deploy_rsa
+  - chmod 600 /tmp/deploy_rsa
+  - ssh-add /tmp/deploy_rsa 
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/<dir> devanooga@devanoobot.roushtech.net:/opt/devanoobot
+  on:
+    branch: master
