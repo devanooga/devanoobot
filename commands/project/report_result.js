@@ -1,3 +1,6 @@
+var winston = require('winston')
+var slack = require('slack')
+var token = process.env.SLACK_TOKEN
 /**
  * Post a message to Slack with a link to the pull request.
  *
@@ -8,5 +11,14 @@
  * @throws Will throw an error if the request to Slack fails.
  */
 module.exports = data => {
-  // Send message to slack.
+  await slack.chat.postMessage({
+    token: token,
+    channel: 'hacknight',
+    text: data.slackmsg,
+  }, (err, data) => {
+    if (err) {
+      return winston.error(err)
+    }
+    winston.log(data)
+  })
 }

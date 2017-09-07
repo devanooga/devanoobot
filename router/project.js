@@ -8,15 +8,15 @@ module.exports = async (ctx, next) => {
 
   const username = ctx.request.body.user_name
   const tmppath = path.join(process.cwd(), '.tmp/')
-  const repo = 'devanooga-meta'
-  const repourl = `github.com:devanooga/${repo}.git`
+  const reponame = 'devanooga-meta'
+  const repourl = `github.com:devanooga/${reponame}.git`
   const branch = `project-idea-by-${username}-${Date.now()}`
   const filepath = path.join(tmppath, repo, 'hack-night/projects.md')
-  const text = ctx.request.body.text
+  const text = `ctx.request.body.text - @${username}`
   const msg = `Add new project idea by ${username}`
 
   try {
-    await project.checkout_new_branch({ tmppath, repourl, username })
+    await project.checkout_new_branch({ tmppath, reponame, repourl, username, branch })
     await project.append_to_file({ filepath, text, username })
     const pull_request = await project.commit_and_push({ msg, branch })
     await project.report_result({ pull_request, username })

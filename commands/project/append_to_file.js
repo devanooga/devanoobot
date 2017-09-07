@@ -1,3 +1,4 @@
+var fs = require('fs')
 /* Append a file with new line of text.
  *
  * @param {object} data - An object containing the following strings:
@@ -9,8 +10,6 @@
  * @throws Will throw an error if document can’t be opened or written to.
  */
 module.exports = data => {
-// Open file.
-// Append an item to the bottom.
-// Write the file.
-// Return.
+  await fs.appendFile(data.filepath, data.text, 'utf-8')
+  return
 }
