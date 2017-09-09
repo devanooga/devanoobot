@@ -31,7 +31,12 @@ module.exports = async (req, res, next) => {
     await checkout_new_branch({ tmppath, reponame, repourl, username, branch })
     await append_to_file({ filepath, text })
     const pull_request = await commit_and_push({ tmppath, reponame, msg, branch })
-    await report_result({ response_url, pull_request, username })
+
+    const response_body = {
+      text: `I submitted a new project idea on behalf of @${username}: ${pull_request}`,
+      response_type: 'in_channel',
+    }
+    await report_result({ response_url, response_body })
   }
   catch (error) {
     winston.error(error)

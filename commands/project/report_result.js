@@ -1,24 +1,16 @@
-var winston = require('winston')
-var slack = require('slack')
-var token = process.env.SLACK_TOKEN
+var got = require('got')
 /**
  * Post a message to Slack with a link to the pull request.
  *
  * @param {object} data - An object with the data necessary to post a message
  *   to Slack.
- * @param {string} data.slackmsg - Text to submit in Slack message.
+ * @param {string} data.response_url - The URL at which to send the result.
+ * @param {object} data.response_body - The body to send in the request.
  *
  * @throws Will throw an error if the request to Slack fails.
  */
 module.exports = data => {
-  await slack.chat.postMessage({
-    token: token,
-    channel: 'hacknight',
-    text: data.slackmsg,
-  }, (err, data) => {
-    if (err) {
-      return winston.error(err)
-    }
-    winston.log(data)
+  return got.post(data.response_url, {
+    body: JSON.stringify(data.response_body),
   })
 }

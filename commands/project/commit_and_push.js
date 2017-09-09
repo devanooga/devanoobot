@@ -31,10 +31,11 @@ module.exports = data => {
   }
 
   // Open a pull request against master.
-  if (shell.exec(`hub pull-request -m '${data.msg}'`).code !== 0) {
+  var pull_request = shell.exec(`hub pull-request -m '${data.msg}'`)
+  if (pull_request.code !== 0) {
     shell.echo('Error: Hub pull-request failed.')
     shell.exit(1)
+  } else {
+    return pull_request
   }
-
-  return
 }
