@@ -12,11 +12,6 @@ module.exports = async (req, res, next) => {
     response_type: 'ephemeral',
   })
 
-  // Verify request token.
-  if (req.body.token !== process.env.SLACK_VERIFICATION_TOKEN) {
-    return winston.error(new Error('Request token cannot be verified.'))
-  }
-
   const username = req.body.user_name
   const tmppath = path.join(process.cwd(), '.tmp/')
   const reponame = 'devanooga-meta'

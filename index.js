@@ -5,11 +5,22 @@ require('dotenv').config()
 const bot = require('express')()
 const body_parser = require('body-parser')
 
-// Register body parser and routes.
+// Register body parser.
 bot.use(body_parser.json())
 bot.use(body_parser.urlencoded({
   extended: true,
 }))
+
+// Verify request token.
+bot.use((req, res, next) => {
+  if (req.body.token !== process.env.SLACK_VERIFICATION_TOKEN) {
+    winston.error(new Error('Request token cannot be verified.'))
+    return res.send(403)
+  }
+  next()
+})
+
+// Register routes.
 bot.use(require('./router'))
 
 // Listen for requests.
