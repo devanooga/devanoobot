@@ -7,7 +7,10 @@ const report_result = require('./report_result')
 
 module.exports = async (req, res, next) => {
   // Respond to the response immediately.
-  res.send('OK')
+  res.send({
+    text: 'I got it! Pull request incoming…',
+    response_type: 'ephemeral',
+  })
 
   // Verify request token.
   if (req.body.token !== process.env.SLACK_VERIFICATION_TOKEN) {
