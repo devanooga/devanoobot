@@ -15,23 +15,26 @@ var path = require('path')
  * @throws Will throw an error if any of the git tasks fail.
  */
 module.exports = data => {
+  // cd into project directory.
   shell.cd(path.join(data.tmppath, data.reponame))
 
+  // Commit changes.
   if (shell.exec(`git commit -am '${data.msg}'`).code !== 0) {
     shell.echo('Error: Git commit failed.')
     shell.exit(1)
   }
 
+  // Push changes to remote repo.
   if (shell.exec('git push').code !== 0) {
     shell.echo('Error: Git push failed.')
     shell.exit(1)
   }
 
-  var pr_result = shell.exec(`git pull-request -m '${data.msg}'`)
-  if (pr_result.code !== 0) {
-    shell.echo('Error: Git pull-request failed.')
+  // Open a pull request against master.
+  if (shell.exec(`hub pull-request -m '${data.msg}'`).code !== 0) {
+    shell.echo('Error: Hub pull-request failed.')
     shell.exit(1)
   }
 
-  return pr_result.stdout
+  return
 }
