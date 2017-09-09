@@ -7,10 +7,9 @@ The bigger bot that might.
 - [Git](https://git-scm.com/)
 - [Hub](https://hub.github.com/)
 
-### Environment variables and keys
-The application relies on a `SLACK_TOKEN` environment variable. Additionally,
-the private devanoobot SSH key must be available and git must be configured to
-use it.
+### Environment
+The private devanoobot SSH key must be available and git must be configured to
+use SSH when performing git tasks.
 
 ## Running the application
 After cloning this repo, install dependencies:
