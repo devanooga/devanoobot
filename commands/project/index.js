@@ -5,20 +5,19 @@ const checkout_new_branch = require('./checkout_new_branch')
 const commit_and_push = require('./commit_and_push')
 const report_result = require('./report_result')
 
-module.exports = async (ctx, next) => {
+module.exports = async (req, res, next) => {
   // Respond to the response immediately.
-  ctx.body = 'OK'
-  await next()
+  res.send('OK')
 
-  const username = ctx.request.body.user_name
+  const username = req.body.user_name
   const tmppath = path.join(process.cwd(), '.tmp/')
   const reponame = 'devanooga-meta'
   const repourl = `github.com:devanooga/${reponame}.git`
   const branch = `project-idea-by-${username}-${Date.now()}`
   const filepath = path.join(tmppath, reponame, 'hack-night/projects.md')
-  const text = `\n- ${ctx.request.body.text} (suggested by @${username})`
+  const text = `\n- ${req.body.text} (suggested by @${username})`
   const msg = `Add new project idea by ${username}`
-  const response_url = ctx.request.body.response_url
+  const response_url = req.body.response_url
 
   try {
     await checkout_new_branch({ tmppath, reponame, repourl, username, branch })
