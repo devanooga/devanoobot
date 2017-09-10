@@ -1,7 +1,7 @@
-/* eslint mocha: true */
+/* eslint-env node, mocha */
 require('should')
 const team_join = require('../../events/team_join')
-var event;
+var event
 
 describe('events/team_join', () => {
   beforeEach(() => {

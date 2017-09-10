@@ -1,7 +1,8 @@
 env:
-  es6: true
   node: true
 extends: 'eslint:recommended'
+parserOptions:
+  ecmaVersion: 8
 rules:
   comma-dangle:
     - error
@@ -23,6 +24,8 @@ rules:
   quotes:
     - error
     - single
+  require-await:
+    - error
   semi:
     - error
     - never

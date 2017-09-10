@@ -1,9 +1,9 @@
 // Load env variables from .env file.
 require('dotenv').config()
 
-// Build express app.
 const bot = require('express')()
 const body_parser = require('body-parser')
+const winston = require('winston')
 
 // Register body parser.
 bot.use(body_parser.json())

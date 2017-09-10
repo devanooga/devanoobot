@@ -9,6 +9,6 @@ const appendFile = promisify(fs.appendFile)
  *
  * @returns A promise that resolves after text has been appended to the file.
  */
-module.exports = async data => {
+module.exports = data => {
   return appendFile(data.filepath, data.text, 'utf-8')
 }

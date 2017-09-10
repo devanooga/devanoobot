@@ -41,7 +41,7 @@ module.exports = async (req, res, next) => {
           footer: 'github.com/devanooga/devanooga-meta',
           footer_icon: 'https://www.devanooga.com/images/favicon.png',
           ts: Math.floor(Date.now() / 1000),
-        }
+        },
       ],
       response_type: 'in_channel',
     }
