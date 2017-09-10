@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
   const branch = `project-idea-by-${username}-${Date.now()}`
   const filepath = path.join(tmppath, reponame, 'hack-night/projects.md')
   const text = `\n- ${req.body.text} (suggested by @${username})`
-  const msg = `Add new project idea by @${username}`
+  const msg = `Add new project idea by ${username}`
   const response_url = req.body.response_url
 
   try {
