@@ -12,6 +12,7 @@ module.exports = async (req, res, next) => {
     response_type: 'ephemeral',
   })
 
+  const userid = req.body.user_id
   const username = req.body.user_name
   const tmppath = path.join(process.cwd(), '.tmp/')
   const reponame = 'devanooga-meta'
@@ -30,9 +31,9 @@ module.exports = async (req, res, next) => {
     const response_body = {
       attachments: [
         {
-          fallback: `I submitted a new project idea on behalf of @${username}: ${pull_request}`,
+          fallback: `I submitted a new <#C4E4UNSKC> project idea on behalf of <@${userid}>: ${pull_request}`,
           color: '#E0644F',
-          pretext: `I submitted a new project idea on behalf of @${username}.`,
+          pretext: `I submitted a new <#C4E4UNSKC> project idea on behalf of <@${userid}>.`,
           author_name: 'devanoobot',
           title: msg,
           title_link: pull_request,
