@@ -12,21 +12,26 @@ module.exports = async (req, res, next) => {
     response_type: 'ephemeral',
   })
 
+  // Grab some basic information.
   const userid = req.body.user_id
   const username = req.body.user_name
+  const response_url = req.body.response_url
+
+  // Set variables for the repo.
   const tmppath = path.join(process.cwd(), '.tmp/')
   const reponame = 'devanooga-meta'
   const repourl = `github.com:devanooga/${reponame}.git`
   const branch = `project-idea-by-${username}-${Date.now()}`
+  const gitmsg = `Add new project idea by ${username}`
+
+  // Set variables for file editing.
   const filepath = path.join(tmppath, reponame, 'hack-night/projects.md')
   const text = `\n- ${req.body.text} (suggested by @${username})`
-  const msg = `Add new project idea by ${username}`
-  const response_url = req.body.response_url
 
   try {
     await checkout_new_branch({ tmppath, reponame, repourl, username, branch })
     await append_to_file({ filepath, text })
-    const pull_request = await commit_and_push({ tmppath, reponame, msg, branch })
+    const pull_request = await commit_and_push({ tmppath, reponame, gitmsg, branch })
 
     const response_body = {
       attachments: [
@@ -35,7 +40,7 @@ module.exports = async (req, res, next) => {
           color: '#E0644F',
           pretext: `I submitted a new <#C4E4UNSKC> project idea on behalf of <@${userid}>.`,
           author_name: 'devanoobot',
-          title: msg,
+          title: gitmsg,
           title_link: pull_request,
           text: req.body.text,
           footer: 'github.com/devanooga/devanooga-meta',
