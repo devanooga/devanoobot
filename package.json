@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint ./ --fix",
     "start": "node index.js",
-    "test": "mocha test/*"
+    "test": "mocha $(find . -name \"*.test.js\" -not -path \"./node_modules/*\")"
   },
   "dependencies": {
     "body-parser": "^1.18.0",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "eslint": "^4.6.1",
     "mocha": "^3.4.2",
+    "proxyquire": "^1.8.0",
     "should": "^11.2.1",
     "should-sinon": "0.0.5",
     "sinon": "^2.3.4"
