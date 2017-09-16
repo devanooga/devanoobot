@@ -11,5 +11,6 @@ module.exports = (req, res, next) => {
   }
   catch (error) {
     // No handler found for event type. Respond w/200.
-    res.send(200)
+    res.sendStatus(200)
+  }
 }
