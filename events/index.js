@@ -6,5 +6,10 @@ module.exports = (req, res, next) => {
     })
   }
 
-  require(`./${req.params.event_type}`)(req, res, next)
+  try {
+    require(`./${req.params.event_type}`)(req, res, next)
+  }
+  catch (error) {
+    // No handler found for event type. Respond w/200.
+    res.send(200)
 }
