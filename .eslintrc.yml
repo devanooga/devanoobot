@@ -4,7 +4,7 @@ extends: 'eslint:recommended'
 parserOptions:
   ecmaVersion: 8
 globals:
-  - Promise
+  Promise: true
 rules:
   comma-dangle:
     - error

@@ -43,5 +43,5 @@ module.exports = (req, res, next) => {
         text: welcome_message,
       },
     })
-  }).catch(err => console.log(err))
+  }).catch(winston.error)
 }
