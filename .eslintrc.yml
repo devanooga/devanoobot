@@ -3,6 +3,8 @@ env:
 extends: 'eslint:recommended'
 parserOptions:
   ecmaVersion: 8
+globals:
+  - Promise
 rules:
   comma-dangle:
     - error
