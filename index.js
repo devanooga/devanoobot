@@ -15,7 +15,7 @@ bot.use(body_parser.urlencoded({
 bot.use((req, res, next) => {
   if (req.body.token !== process.env.SLACK_VERIFICATION_TOKEN) {
     winston.error(new Error('Request token cannot be verified.'))
-    return res.send(403)
+    return res.sendStatus(403)
   }
   next()
 })
