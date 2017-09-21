@@ -1,0 +1,33 @@
+env:
+  node: true
+extends: 'eslint:recommended'
+parserOptions:
+  ecmaVersion: 8
+globals:
+  Promise: true
+rules:
+  comma-dangle:
+    - error
+    - arrays: 'always-multiline'
+      objects: 'always-multiline'
+      functions: 'ignore'
+  indent:
+    - error
+    - 2
+  linebreak-style:
+    - error
+    - unix
+  no-trailing-spaces:
+    - error
+  no-unused-vars:
+    - error
+    - vars: 'all'
+      args: 'none'
+  quotes:
+    - error
+    - single
+  require-await:
+    - error
+  semi:
+    - error
+    - never
