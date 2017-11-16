@@ -1,0 +1,15 @@
+{
+  "apps" : [
+    {
+      "name" : "worker",
+      "script" : "./worker.js",
+      "instances" : 1,
+      "exec_mode" : "fork"
+    }, {
+      "name" : "bot",
+      "script" : "./index.js",
+      "instances" : 4,
+      "exec_mode" : "cluster"
+    }
+  ]
+}
