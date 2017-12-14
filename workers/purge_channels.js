@@ -17,16 +17,23 @@ const knex = require('knex')({
   },
 })
 
-purge_channels()
-
-const job = new CronJob({
-  cronTime: '00 00 09 01 * *',
+// At 8am on Monday, purge channels still in the DB.
+new CronJob({
+  cronTime: '00 00 08 01 * *',
   onTick: purge_channels,
   start: true,
   timezone: 'America/New York',
 })
 
-async function purge_channels () {
+// At 9am on Monday, notify inactive channels about archival queue.
+new CronJob({
+  cronTime: '00 00 09 01 * *',
+  onTick: notify_channels,
+  start: true,
+  timezone: 'America/New York',
+})
+
+async function notify_channels () {
   const channels = await bot.channels.list({}).then(response => {
     return response.channels.filter(channel => !channel.is_archived)
   }).catch(err => err)
@@ -100,4 +107,21 @@ async function purge_channels () {
       return knex.insert(record).into('purge_queue')
     }).catch(err => winston.error(err)) }))
 
+}
+
+async function purge_channels () {
+  const records = await knex.select('*').from('purge_queue')
+    .catch(err => winston.error(err))
+
+  if (!records || !records.length) { return }
+
+  records.forEach(record => {
+    bot.channels.archive({
+      token,
+      channel: record.channel_id,
+    }).then(() => {
+      return knex.delete().from('purge_queue')
+        .where('channel_id', '=', record.channel_id)
+    }).catch(err => winston.error(err))
+  })
 }
