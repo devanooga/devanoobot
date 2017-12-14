@@ -64,8 +64,7 @@ async function purge_channels () {
     // Post message on channel and get message id back.
     return bot.chat.postMessage({
       token,
-      // channel: channel.id,
-      channel: 'C3Y7T0J6P',
+      channel: channel.id,
       text: purge_message(channel.id),
       attachments: [{
         fallback: 'Something’s wrong, and an interactive button could not be created. :sadpanda:',
@@ -85,8 +84,7 @@ async function purge_channels () {
       }],
     }).then(result => {
       return {
-        // channel_id: channel.id,
-        channel_id: 'C3Y7T0J6P',
+        channel_id: channel.id,
         message_ts: result.ts,
       }
     })
