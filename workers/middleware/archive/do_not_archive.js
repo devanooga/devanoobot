@@ -11,7 +11,7 @@ const winston = require('winston')
 const knex = require('knex')({
   dialect: 'sqlite3',
   connection: {
-    filename: path.join(process.cwd(), 'db/dev.sqlite3'),
+    filename: path.join(process.cwd(), `db/${process.env.NODE_ENV || 'dev'}.sqlite3`),
   },
 })
 
