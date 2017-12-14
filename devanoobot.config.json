@@ -2,7 +2,7 @@
   "apps" : [
     {
       "name" : "worker",
-      "script" : "./worker.js",
+      "script" : "./workers/purge_channels.js",
       "instances" : 1,
       "exec_mode" : "fork",
       "env" : {
