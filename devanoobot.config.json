@@ -1,0 +1,21 @@
+{
+  "apps" : [
+    {
+      "name" : "worker",
+      "script" : "./workers/purge_channels.js",
+      "instances" : 1,
+      "exec_mode" : "fork",
+      "env" : {
+        "NODE_ENV": "production"
+      }
+    }, {
+      "name" : "bot",
+      "script" : "./index.js",
+      "instances" : 4,
+      "exec_mode" : "cluster",
+      "env" : {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}
