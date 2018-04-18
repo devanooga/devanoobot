@@ -34,17 +34,18 @@ new CronJob({
 })
 
 async function notify_channels () {
-  const channels = await bot.channels.list({}).then(response => {
+  // Find all public, unarchived channels.
+  const unarchived_channels = await bot.channels.list({}).then(response => {
     return response.channels.filter(channel => !channel.is_archived)
   }).catch(err => err)
 
   // If channels has a message property, it’s an error. 😔
-  if (channels.message) {
-    winston.error(`Error retrieving channel list. ${channels.message}`)
+  if (unarchived_channels.message) {
+    winston.error(`Error retrieving channel list. ${unarchived_channels.message}`)
     return
   }
 
-  const unarchived_channels = await Promise.all(channels.map(channel => {
+  const candidates = await Promise.all(unarchived_channels.map(channel => {
     return bot.channels.history({
       channel: channel.id,
       count: 1,
@@ -56,7 +57,7 @@ async function notify_channels () {
     })
   }))
 
-  const candidates = unarchived_channels.filter(channel => {
+  const archiveable_channels = unarchived_channels.filter(channel => {
     return channel && channel.last_message &&
       (moment.unix(channel.last_message.ts) <= moment().subtract(1, 'months'))
   })
@@ -67,7 +68,7 @@ async function notify_channels () {
     return null
   }
 
-  const notified_channels_records = await Promise.all(candidates.map(channel => {
+  const notified_channels_records = await Promise.all(archiveable_channels.map(channel => {
     // Post message on channel and get message id back.
     return bot.chat.postMessage({
       token,
@@ -105,13 +106,13 @@ async function notify_channels () {
       timestamp: record.message_ts,
     }).then(() => {
       return knex.insert(record).into('purge_queue')
-    }).catch(err => winston.error(err)) }))
-
+    }).catch(winston.error)
+  }) )
 }
 
 async function purge_channels () {
   const records = await knex.select('*').from('purge_queue')
-    .catch(err => winston.error(err))
+    .catch(winston.error)
 
   if (!records || !records.length) { return }
 
@@ -122,6 +123,6 @@ async function purge_channels () {
     }).then(() => {
       return knex.delete().from('purge_queue')
         .where('channel_id', '=', record.channel_id)
-    }).catch(err => winston.error(err))
+    }).catch(winston.error)
   })
 }

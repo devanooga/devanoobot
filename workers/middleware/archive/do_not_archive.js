@@ -43,11 +43,14 @@ module.exports = async (req, res, next) => {
     }],
   })
 
+  // Remove all messages that the bot may have posted about archiving this
+  // channel. They may be more than one if a previous operation had failed for
+  // some reason.
   records.forEach(record => {
     bot.pins.remove({
       token,
       channel: record.channel_id,
       timestamp: record.message_ts,
-    }).catch(err => winston.error(err))
+    }).catch(winston.error)
   })
 }
