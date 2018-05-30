@@ -1,3 +1,4 @@
+/* eslint-env node, mocha */
 const cryptovalue = require('../../commands/cryptovalue');
 const sinon = require('sinon');
 require('should');
