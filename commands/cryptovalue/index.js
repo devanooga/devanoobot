@@ -2,12 +2,12 @@ const winston = require('winston')
 const got = require('got')
 const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=usd'
 
-module.exports = async (req, res, next) => {
+module.exports = (req, res, next) => {
   const input = req.body.text || 'bitcoin';
   return got(url).then((data) => {
     const results = data.filter( (item) => {
       return item.id === input.toLowerCase() || item.symbol.toLowerCase() === input.toLowerCase();
-    )};
+    });
     
     if(results.length === 1) {
       var crypto = results[0];
