@@ -6,7 +6,6 @@ module.exports = (req, res, next) => {
   const input = req.body.text || 'bitcoin'
 
   return got(url).then(raw => {
-    console.log(typeof raw.body)
     const response = JSON.parse(raw.body)
     const results = response.filter( (item) => {
       return item.id === input.toLowerCase() || item.symbol.toLowerCase() === input.toLowerCase()
