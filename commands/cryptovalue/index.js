@@ -17,17 +17,17 @@ module.exports = (req, res, next) => {
       return item.id === input.toLowerCase() || item.symbol.toLowerCase() === input.toLowerCase()
     })
 
-    var response_body
+    let response_body
 
     if(results.length === 1) {
-      var crypto = results[0]
+      let crypto = results[0]
       response_body = {
-        text: crypto.name + '(' + crypto.symbol + ') - $' + crypto.price_usd + '(USD)',
+        text: `${crypto.name} (${crypto.symbol}) - $${crypto.symbol} (USD)`,
         response_type: 'in_channel',
       }
     } else {
       response_body = {
-        text: 'Could not find crypto currency with the name: ' + input,
+        text: `Could not find crypto currency with the name: ${input}`,
         response_type: 'ephemeral',
       }
     }
