@@ -12,6 +12,7 @@ winston.add(slack_winston, {
   webhook_url: process.env.SLACK_LOGS_WEBHOOK_URL,
   channel: 'devanoobot_logs',
   level: 'error',
+  message: '*{{message}}*\n\n```\n{{meta}}\n```',
 })
 
 // Register body parser.
