@@ -14,6 +14,6 @@ module.exports = (req, res, next) => {
   catch (error) {
     // No handler found for event type. Respond w/200 and log the event.
     res.sendStatus(200)
-    winston.error(error)
+    winston.log(error)
   }
 }
