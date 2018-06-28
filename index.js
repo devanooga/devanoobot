@@ -5,6 +5,14 @@ const _ = require('lodash')
 const bot = require('express')()
 const body_parser = require('body-parser')
 const winston = require('winston')
+const slack_winston = require('slack-winston').Slack
+winston.add(slack_winston, {
+  domain: 'devanooga',
+  token: process.env.SLACK_VERIFICATION_TOKEN,
+  webhook_url: process.env.SLACK_LOGS_WEBHOOK_URL,
+  channel: 'devanoobot_logs',
+  level: 'error',
+})
 
 // Register body parser.
 bot.use(body_parser.json())
