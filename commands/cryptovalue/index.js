@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
     if(results.length === 1) {
       let crypto = results[0]
       response_body = {
-        text: `${crypto.name} (${crypto.symbol}) - $${crypto.symbol} (USD)`,
+        text: `${crypto.name} (${crypto.symbol}) - $${crypto.price_usd} (USD)`,
         response_type: 'in_channel',
       }
     } else {
