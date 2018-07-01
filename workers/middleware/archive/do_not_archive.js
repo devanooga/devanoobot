@@ -38,7 +38,7 @@ module.exports = async (req, res, next) => {
     channel: channel.id,
     text: purge_message(channel.id),
     attachments: [{
-      color: '#E0644F',
+      color: '#96BA71',
       text: `:ok_hand: <@${user.id}> saved the day!\n\nI’ve removed <#${channel.id}> from the queue.`,
     }],
   })
