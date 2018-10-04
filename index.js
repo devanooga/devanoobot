@@ -4,8 +4,10 @@ require('dotenv').config()
 const _ = require('lodash')
 const bot = require('express')()
 const body_parser = require('body-parser')
+const got = require('got')
 const winston = require('winston')
 const slack_winston = require('slack-winston').Slack
+
 winston.add(slack_winston, {
   domain: 'devanooga',
   token: process.env.SLACK_VERIFICATION_TOKEN,
@@ -39,5 +41,10 @@ bot.use((req, res, next) => {
 // Register routes.
 bot.use(require('./router'))
 
-// Listen for requests.
-bot.listen(3000)
+// Listen for requests and announce own state of being alive!
+bot.listen(3000, () => got.post(process.env.SLACK_FUNSIES_WEBHOOK_URL, {
+  body: '{ "text": "https://www.youtube.com/watch?v=WlgJs_G8Co8" }',
+  headers: {
+    'Content-type': 'application/json',
+  },
+}))
